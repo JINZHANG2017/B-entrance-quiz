@@ -1,15 +1,21 @@
 package com.thoughtworks.capability.gtb.entrancequiz.api;
 
+import com.thoughtworks.capability.gtb.entrancequiz.data.StudentRepo;
+import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,6 +49,20 @@ class StudentControllerTest {
         mockMvc
                 .perform(get("/student/shuffle"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldAddStudent() throws Exception {
+
+        StudentRepo studentRepo=new StudentRepo();
+        List<Student> studentList=studentRepo.getStudentList();
+        assertEquals(15,studentList.size());
+        mockMvc
+                .perform(post("/student/list").content("{\"name\":\"张三\"}").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        studentList=studentRepo.getStudentList();
+        assertEquals(16,studentList.size());
+        assertEquals("张三",studentList.get(15).getName());
     }
 
 }

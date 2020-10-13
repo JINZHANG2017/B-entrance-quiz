@@ -4,13 +4,11 @@ import com.thoughtworks.capability.gtb.entrancequiz.data.StudentRepo;
 import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -40,12 +38,13 @@ public class StudentController {
         return ResponseEntity.ok(studentList);
     }
 
-//    @GetMapping("/student/list")
-//    public ResponseEntity<List<Student>> getStudentList(){
-////        List<String> list=new ArrayList<>();
-////        list.add("hello");
-//        StudentRepo studentRepo=new StudentRepo();
-//        List<Student> studentList = studentRepo.getStudentList();
-//        return ResponseEntity.ok(studentList);
-//    }
+    @PostMapping("/student/list")
+    public ResponseEntity getStudentList(@RequestBody Map studentNameMap){
+//        List<String> list=new ArrayList<>();
+//        list.add("hello");
+        StudentRepo studentRepo=new StudentRepo();
+        List<Student> studentList=studentRepo.getStudentList();
+        studentList.add(new Student(studentList.size()+1,studentNameMap.get("name").toString()));
+        return ResponseEntity.ok().build();
+    }
 }
