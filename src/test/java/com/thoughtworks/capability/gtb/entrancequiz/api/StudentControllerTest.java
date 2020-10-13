@@ -26,8 +26,8 @@ class StudentControllerTest {
         mockMvc
                 .perform(get("/student/list"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("hello")));
+                .andExpect(jsonPath("$", hasSize(15)))
+                .andExpect(jsonPath("$[0].name", is("成吉思汗")));
     }
 
 
