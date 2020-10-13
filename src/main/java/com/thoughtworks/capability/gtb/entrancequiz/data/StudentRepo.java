@@ -20,7 +20,7 @@ public class StudentRepo {
         }
     }
 
-    private static List<Student> shuffleList=new ArrayList<>(list);;
+    private static List<Student> shuffleList=new ArrayList<>(list);
 
     public List<Student> getRandomStudentList(){
         //shuffle();
@@ -28,6 +28,7 @@ public class StudentRepo {
     }
 
     public static void shuffle(){
+        shuffleList=new ArrayList<>(list);
         Collections.shuffle(shuffleList);
     }
 }
