@@ -24,11 +24,18 @@ class StudentControllerTest {
     @Test
     public void shouldGetStudentList() throws Exception {
         mockMvc
-                .perform(get("/student/list"))
+                .perform(get("/student/list?isShuffle=0"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(15)))
                 .andExpect(jsonPath("$[0].name", is("成吉思汗")));
     }
 
+    @Test
+    public void shouldGetRandomStudentList() throws Exception {
+        mockMvc
+                .perform(get("/student/list?isShuffle=1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(15)));
+    }
 
 }

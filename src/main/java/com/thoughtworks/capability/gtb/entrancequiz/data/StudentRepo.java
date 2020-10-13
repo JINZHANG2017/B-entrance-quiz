@@ -4,6 +4,7 @@ import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class StudentRepo {
@@ -17,5 +18,16 @@ public class StudentRepo {
         for(int i=0;i<strArray.length;i++){
             list.add(new Student(i+1,strArray[i]));
         }
+    }
+
+    private static List<Student> shuffleList=new ArrayList<>(list);;
+
+    public List<Student> getRandomStudentList(){
+        shuffle();
+        return shuffleList;
+    }
+
+    public static void shuffle(){
+        Collections.shuffle(shuffleList);
     }
 }
