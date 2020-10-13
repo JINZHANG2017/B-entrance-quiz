@@ -29,6 +29,17 @@ public class StudentController {
         return ResponseEntity.ok(studentList);
     }
 
+    @GetMapping("/student/shuffle")
+    public ResponseEntity<List<Student>> shuffleStudentList(){
+//        List<String> list=new ArrayList<>();
+//        list.add("hello");
+        StudentRepo studentRepo=new StudentRepo();
+        List<Student> studentList=new ArrayList<>();
+        StudentRepo.shuffle();
+        studentList=studentRepo.getRandomStudentList();
+        return ResponseEntity.ok(studentList);
+    }
+
 //    @GetMapping("/student/list")
 //    public ResponseEntity<List<Student>> getStudentList(){
 ////        List<String> list=new ArrayList<>();

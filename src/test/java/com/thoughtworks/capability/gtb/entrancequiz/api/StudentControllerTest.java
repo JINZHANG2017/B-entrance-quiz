@@ -38,4 +38,11 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$", hasSize(15)));
     }
 
+    @Test
+    public void shouldShuffleStudentList() throws Exception {
+        mockMvc
+                .perform(get("/student/shuffle"))
+                .andExpect(status().isOk());
+    }
+
 }

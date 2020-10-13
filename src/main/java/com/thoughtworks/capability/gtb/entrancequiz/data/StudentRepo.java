@@ -23,7 +23,7 @@ public class StudentRepo {
     private static List<Student> shuffleList=new ArrayList<>(list);;
 
     public List<Student> getRandomStudentList(){
-        shuffle();
+        //shuffle();
         return shuffleList;
     }
 
